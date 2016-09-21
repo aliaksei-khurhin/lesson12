@@ -1,0 +1,95 @@
+[0;32mInfo: Using configured environment 'production'[0m
+[0;32mInfo: Retrieving pluginfacts[0m
+[0;32mInfo: Retrieving plugin[0m
+[0;32mInfo: Loading facts[0m
+[0;32mInfo: Caching catalog for puppet-node.minsk.epam.com[0m
+[0;32mInfo: Applying configuration version '1474452940'[0m
+[mNotice: /Stage[main]/Mysql::Server::Config/File[/etc/my.cnf.d]/ensure: created[0m
+[mNotice: /Stage[main]/Mysql::Server::Config/File[mysql-config-file]/content: 
+--- /etc/my.cnf	2016-05-11 07:31:18.000000000 +0100
++++ /tmp/puppet-file20160921-18989-e882ml	2016-09-21 11:15:41.746218468 +0100
+@@ -1,10 +1,63 @@
++### MANAGED BY PUPPET ###
++
++[client]
++port = 3306
++socket = /var/lib/mysql/mysql.sock
++
++[isamchk]
++key_buffer_size = 16M
++
+ [mysqld]
+-datadir=/var/lib/mysql
+-socket=/var/lib/mysql/mysql.sock
+-user=mysql
+-# Disabling symbolic-links is recommended to prevent assorted security risks
+-symbolic-links=0
++basedir = /usr
++bind-address = 127.0.0.1
++datadir = /var/lib/mysql
++expire_logs_days = 10
++key_buffer_size = 16M
++log-error = /var/log/mysqld.log
++max_allowed_packet = 16M
++max_binlog_size = 100M
++max_connections = 1024
++pid-file = /var/run/mysqld/mysqld.pid
++port = 3306
++query_cache_limit = 1M
++query_cache_size = 16M
++skip-external-locking
++socket = /var/lib/mysql/mysql.sock
++ssl = false
++ssl-ca = /etc/mysql/cacert.pem
++ssl-cert = /etc/mysql/server-cert.pem
++ssl-key = /etc/mysql/server-key.pem
++thread_cache_size = 8
++thread_stack = 256K
++tmpdir = /tmp
++user = mysql
++
++[mysqld-5.0]
++myisam-recover = BACKUP
++
++[mysqld-5.1]
++myisam-recover = BACKUP
++
++[mysqld-5.5]
++myisam-recover = BACKUP
++
++[mysqld-5.6]
++myisam-recover-options = BACKUP
++
++[mysqld-5.7]
++myisam-recover-options = BACKUP
+ 
+ [mysqld_safe]
+-log-error=/var/log/mysqld.log
+-pid-file=/var/run/mysqld/mysqld.pid
++log-error = /var/log/mysqld.log
++nice = 0
++socket = /var/lib/mysql/mysql.sock
++
++[mysqldump]
++max_allowed_packet = 16M
++quick
++quote-names
++
++
++
++!includedir /etc/my.cnf.d
++
+[0m
+[0;32mInfo: Computing checksum on file /etc/my.cnf[0m
+[0;32mInfo: /Stage[main]/Mysql::Server::Config/File[mysql-config-file]: Filebucketed /etc/my.cnf to puppet with sum 8ace886bbe7e274448bc8bea16d3ead6[0m
+[mNotice: /Stage[main]/Mysql::Server::Config/File[mysql-config-file]/content: content changed '{md5}8ace886bbe7e274448bc8bea16d3ead6' to '{md5}48c654e2a4e67c821c4ceaa60e011c0f'[0m
+[mNotice: /Stage[main]/Mysql::Server::Install/Package[mysql-server]/ensure: created[0m
+[mNotice: /Stage[main]/Mysql::Server::Installdb/Mysql_datadir[/var/lib/mysql]/ensure: created[0m
+[mNotice: /Stage[main]/Mysql::Server::Service/Service[mysqld]/ensure: ensure changed 'stopped' to 'running'[0m
+[0;32mInfo: /Stage[main]/Mysql::Server::Service/Service[mysqld]: Unscheduling refresh on Service[mysqld][0m
+[mNotice: /Stage[main]/Mysql::Server::Root_password/Mysql_user[root@localhost]/password_hash: defined 'password_hash' as '*D3CBE489A6F7413ED7455B7CEB2FC4C5DF3E9BEB'[0m
+[mNotice: /Stage[main]/Mysql::Server::Root_password/File[/root/.my.cnf]/ensure: defined content as '{md5}496bc1eceb3fb17dadcf68b7414d83b1'[0m
+[mNotice: /Stage[main]/Main/Node[default]/Mysql_database[test_mdb]/ensure: created[0m
+[mNotice: /Stage[main]/Main/Node[default]/Mysql_user[test_user@localhost]/ensure: created[0m
+[mNotice: /Stage[main]/Main/Node[default]/Mysql_grant[test_user@localhost/test_mdb.*]/ensure: created[0m
+[mNotice: Applied catalog in 11.74 seconds[0m
